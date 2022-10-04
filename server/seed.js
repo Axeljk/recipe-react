@@ -8,34 +8,48 @@ database.once("open", async () => {
 	await models.Ingredient.deleteMany({});
 	Promise.all([
 		models.Ingredient.create({
-			name: "Diced Tomatoes",
-			quantity: "16oz",
+			name: "Tomato",
 			category: "Vegetable"
 		}),
 		models.Ingredient.create({
-			name: "Onion (white or Vidalia)",
-			quantity: "1",
+			name: "Onion",
 			category: "Vegetable"
 		}),
 		models.Ingredient.create({
-			name: "Green bell pepper",
-			quantity: "1",
+			name: "Bell pepper",
 			category: "Vegetable"
 		}),
 		models.Ingredient.create({
-			name: "Kraft Deli Deluxe Slices",
-			quantity: "24 slices (16oz)",
+			name: "Processed cheese",
 			category: "Dairy"
 		}),
 	]).then(values => {
 		models.Recipe.create({
 			name: "Chili con Queso",
-			story: "This is a family recipe of unknown origin. The type of onion isn't super important; a mild variant for sensitive will still provide much-needed flavor. The cheese can be substituted with 16oz of Velveeta cheese, but the deli slices are easier to melt into the chili con queso. NEVER use Kraft Singles. Other cheese substitutes may require higher heat.",
+			story: [
+				"This is a family recipe of unknown origin. The type of onion isn't super important; a mild variant for sensitive will still provide much-needed flavor. The cheese can be substituted with 16oz of Velveeta cheese, but the deli slices are easier to melt into the chili con queso. NEVER use Kraft Singles. Other cheese substitutes may require higher heat."
+			],
 			ingredients: [
-				values[0],
-				values[1],
-				values[2],
-				values[3]
+				{
+					name: "Diced Tomatoes",
+					amount: "16oz",
+					source: values[0]
+				},
+				{
+					name: "Onion (white or Vidalia)",
+					amount: "1",
+					source: values[1]
+				},
+				{
+					name: "Green bell pepper",
+					amount: "1",
+					source: values[2]
+				},
+				{
+					name: "Kraft Deli Deluxe Slices",
+					amount: "24",
+					source: values[3]
+				}
 			],
 			steps: [
 				"Dice onion and bell pepper.",
@@ -45,12 +59,12 @@ database.once("open", async () => {
 				"Mix thoroughly by hand until sauce thickens, 2-5 minutes.",
 				"Serve with corn chips (Fritos recommended) or in a tortilla."
 			]
-		}).then(recipes => {
+		}).then(values => {
 			models.Profile.create({
 				name: "Axel",
 				email: "axeljkern@gmail.com",
 				recipes: [
-					recipes[0]
+					values[0]
 				]
 			}).then(results => database.close());
 		});

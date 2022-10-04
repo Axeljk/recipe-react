@@ -6,10 +6,6 @@ const ingredientSchema = new Schema(
 			type: String,
 			required: [true, "Name of ingredient missing."]
 		},
-		quantity: {
-			type: String,
-			required: [true, "Amount of ingredient missing."]
-		},
 		category: {
 			type: String,
 			required: [true, "Ingredient category required."]

@@ -4,8 +4,10 @@ const { Recipe } = require("../../models");
 
 router.route("/").get((req, res) => {
 	Recipe.find()
-		.populate("ingredients")
-		.then(results => res.json(results));
+		.populate({
+			path: "ingredients.source",
+			select: "category"
+		}).then(results => res.json(results));
 });
 
 router.route("/:id").get((req, res) => {

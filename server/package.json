@@ -1,14 +1,15 @@
 {
-  "name": "server",
+  "name": "Recipe Backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Server handling for recipe website.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node seed.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Axel Kern",
+  "license": "MIT",
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.1",

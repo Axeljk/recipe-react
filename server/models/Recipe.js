@@ -45,10 +45,13 @@ recipeSchema.pre("findOne", function(next) {
 	next();
 });
 recipeSchema.virtual("contains").get(function() {
+	if (this.ingredients === undefined)
+		return
+
 	let categories = this.ingredients.map(e => e.source.category);
 	categories = [...new Set(categories)];
-	if (categories.indexOf("Vegetable") !== -1)
-		categories.splice(categories.indexOf("Vegetable"), 1);
+	if (categories.indexOf("Plant") !== -1)
+		categories.splice(categories.indexOf("Plant"), 1);
 	if (categories.indexOf("Meat") === -1) {
 		categories.push("Vegetarian");
 
